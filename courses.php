@@ -1,14 +1,12 @@
 <?php
-  // Including the database connection file
-  include('./dbConnection.php');
-
-  // Including the header section of the main content
-  include('./mainInclude/header.php'); 
+include('./dbConnection.php');
+// Header Include from mainInclude 
+include('./mainInclude/header.php');
 ?>
+
 <div class="container-fluid bg-dark">
     <!-- Start Course Page Banner -->
     <div class="row">
-        <!-- Displaying an image for the course page banner -->
         <img src="./image/virtuallearning.jpg" alt="courses"
             style="height:500px; width:100%; object-fit:cover; box-shadow:10px;" />
     </div>
@@ -20,15 +18,21 @@
     <div class="row mt-4">
         <!-- Start All Course Row -->
         <?php
-        // Retrieving all courses from the database
-        $sql = "SELECT * FROM course";
+        // Pagination configuration
+        $results_per_page = 6;
+        if (!isset($_GET['page'])) {
+            $page = 1;
+        } else {
+            $page = $_GET['page'];
+        }
+        $start_from = ($page - 1) * $results_per_page;
+
+        $sql = "SELECT * FROM course LIMIT $start_from, $results_per_page";
         $result = $conn->query($sql);
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
-                // Storing course details in variables for easier access
                 $course_id = $row['course_id'];
-                // Displaying each course in a card format
-                echo ' 
+                echo '
                     <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 mb-4">
                         <a href="coursedetails.php?course_id=' . $course_id . '" class="btn" style="text-align: left; padding:0px;">
                             <div class="card">
@@ -47,17 +51,32 @@
                 ';
             }
         }
-    ?>
+        ?>
     </div><!-- End All Course Row -->
 </div><!-- End All Course -->
 
+<!-- Pagination -->
+<div class="container mt-3 mb-5">
+    <ul class="pagination justify-content-center">
+        <?php
+        $sql = "SELECT COUNT(*) AS total FROM course";
+        $result = $conn->query($sql);
+        $row = $result->fetch_assoc();
+        $total_pages = ceil($row["total"] / $results_per_page);
 
-<?php 
-  // Including the contact section
-  include('./contact.php'); 
+        for ($i = 1; $i <= $total_pages; $i++) {
+            echo "<li class='page-item'><a class='page-link' href='?page=" . $i . "'>" . $i . "</a></li>";
+        }
+        ?>
+    </ul>
+</div>
+
+<?php
+// Contact Us
+include('./contact.php');
 ?>
 
-<?php 
-  // Including the footer section from mainInclude 
-  include('./mainInclude/footer.php'); 
+<?php
+// Footer Include from mainInclude 
+include('./mainInclude/footer.php');
 ?>

@@ -46,6 +46,10 @@
                         <p class="card-text d-inline">Price: <small><del>&#65284 '.$row['course_original_price'].'</del></small> <span class="font-weight-bolder">&#65284 '.$row['course_price'].'<span></p>
                         <!-- Hidden input field to pass course price to checkout -->
                         <input type="hidden" name="id" value='. $row["course_price"] .'> 
+
+                        <!-- Hidden input field to pass course price to checkout -->
+                        <input type="hidden" name="cid" value='. $row["course_id"] .'> 
+
                         <!-- Button to buy the course -->
                         <button type="submit" class="btn text-white font-weight-bolder float-right" style="background-color: #092737; color: white" name="buy">Buy Now</button>
                       </form>

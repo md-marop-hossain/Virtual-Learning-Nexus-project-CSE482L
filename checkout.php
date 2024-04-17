@@ -1,6 +1,7 @@
 <?php 
 include('./dbConnection.php');
 session_start();
+
 if(!isset($_SESSION['stuLogEmail'])) {
     echo "<script> location.href='loginorsignup.php'; </script>";
 } else {
@@ -16,9 +17,16 @@ if(!isset($_SESSION['stuLogEmail'])) {
             // Generate current date
             $orderDate = date("Y-m-d");
 
+            // $TXNID = hash('sha256', $stuEmail . $orderDate . microtime());
+            // Generate a TXNID with limited length
+            $txnBase  = $stuEmail . $orderDate . microtime(); 
+            $TXNID = substr(hash('sha256', $txnBase), 0, 16); // Extract first 16 characters
+
+            $status = "TXN_SUCCESS";
+
             // Insert data into the database
-            $sql = "INSERT INTO courseorder (order_id, stu_email, course_id, order_date, amount) 
-                    VALUES ('$orderID', '$stuEmail', '$courseID', '$orderDate', '$amount')";
+            $sql = "INSERT INTO courseorder (order_id, stu_email, course_id, order_date, amount, TXNID, status ) 
+                    VALUES ('$orderID', '$stuEmail', '$courseID', '$orderDate', '$amount', '$TXNID', '$status')";
             $result = $conn->query($sql);
 
             if ($result) {
@@ -54,7 +62,7 @@ if(!isset($_SESSION['stuLogEmail'])) {
     <title>Checkout</title>
 </head>
 
-<body>
+<body style="background-color: #0c0e11">
     <div class="container mt-5">
         <div class="row">
             <div class="col-sm-6 offset-sm-3 jumbotron">
@@ -112,6 +120,11 @@ if(!isset($_SESSION['stuLogEmail'])) {
 
     <!-- Font Awesome JS -->
     <script type="text/javascript" src="js/all.min.js"></script>
+
+
+
+
+
 </body>
 
 </html>

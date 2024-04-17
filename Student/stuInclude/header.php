@@ -48,7 +48,7 @@ if(isset($stuLogEmail)){
 
 </head>
 
-<body>
+<body style="background-color: #03264838">
     <!-- Top Navbar -->
     <!-- Navigation bar with the application name -->
     <nav class="navbar navbar-dark fixed-top flex-md-nowrap p-0 shadow" style="background-color: #225470;">

@@ -49,7 +49,7 @@ include('../dbConnection.php');
         </div>
         <div class="form-group">
             <label for="course_desc">Course Description</label>
-            <textarea class="form-control" id="course_desc" name="course_desc" row=2></textarea>
+            <textarea class="form-control" id="course_desc" name="course_desc"></textarea>
         </div>
         <div class="form-group">
             <label for="course_author">Author</label>

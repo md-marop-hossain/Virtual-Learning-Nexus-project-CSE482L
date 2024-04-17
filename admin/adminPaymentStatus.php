@@ -25,7 +25,7 @@
                     autocomplete="off" value="<?php echo $ORDER_ID ?>">
             </div>
             <div>
-                <input class="btn btn-primary mx-4" value="View" type="submit">
+                <input class="btn btn-success mx-4" value="View" type="submit">
             </div>
         </div>
     </form>

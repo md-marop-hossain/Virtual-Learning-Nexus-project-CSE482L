@@ -3,6 +3,7 @@
 include('./dbConnection.php');
 // Including the header section from mainInclude
 include('./mainInclude/header.php'); 
+$stu_email = '';
 ?>
 
 <div class="container-fluid bg-dark">
@@ -28,7 +29,10 @@ include('./mainInclude/header.php');
         if($result->num_rows > 0){ 
             // Displaying course details
             while($row = $result->fetch_assoc()){
-                $stu_email = $_SESSION['stuLogEmail'];
+                // Check if stuLogEmail is set in the session
+                if(isset($_SESSION['stuLogEmail'])) {
+                    $stu_email = $_SESSION['stuLogEmail'];
+                }
                 echo ' 
                 <div class="row">
                     <div class="col-md-4">
@@ -41,6 +45,7 @@ include('./mainInclude/header.php');
                             <p class="card-text"> Description: '.$row['course_desc'].'</p>
                             <p class="card-text"> Duration: '.$row['course_duration'].'</p>';
                             // Check if the user has already bought the course
+                            
                             $check_order_sql = "SELECT course_id, stu_email FROM courseorder WHERE course_id = '$course_id' AND stu_email = '$stu_email'";
                             $check_order_result = $conn->query($check_order_sql);
                             if($check_order_result->num_rows > 0) {

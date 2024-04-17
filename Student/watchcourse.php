@@ -38,11 +38,12 @@ if(isset($_SESSION['is_login'])){
 
 <body>
 
-    <div class="container-fluid bg-success p-2">
+    <div class="container-fluid p-2" style="background-Color: #000; Color: white">
         <!-- Header -->
-        <h3>Welcome to E-Learning</h3>
+        <h3 class="mx-auto text-center">Welcome to E-Learning</h3>
         <!-- Button to navigate to My Courses page -->
-        <a class="btn btn-danger" href="./myCourse.php">My Courses</a>
+        <div class="text-center "> <a class="btn btn-success" href="./myCourse.php">My
+                Courses</a></div>
     </div>
 
     <div class="container-fluid">

@@ -1,3 +1,7 @@
+<?php
+// Start the session at the very beginning of the PHP script
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -69,7 +73,6 @@
                 <li class="nav-item custom-nav-item"><a href="courses.php" class="nav-link">Courses</a></li>
                 <!-- Profile and logout links (dynamic based on session) -->
                 <?php 
-                    session_start();   
                     if (isset($_SESSION['is_login'])){
                         echo '<li class="nav-item custom-nav-item"><a href="student/studentProfile.php" class="nav-link">My Profile</a></li> <li class="nav-item custom-nav-item"><a href="logout.php" class="nav-link">Logout</a></li>';
                     } else {
@@ -82,3 +85,6 @@
             </ul>
         </div>
     </nav> <!-- End Navigation -->
+</body>
+
+</html>

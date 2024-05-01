@@ -13,22 +13,45 @@ include('./mainInclude/header.php');
 </div> <!-- End Course Page Banner -->
 
 <div class="container mt-5">
+    <!-- Search Form -->
+    <div class="row justify-content-center">
+        <form method="GET" action="" class="form-inline">
+            <input type="text" name="search" class="form-control mr-2" placeholder="Search courses..."
+                value="<?php echo isset($_GET['search']) ? $_GET['search'] : ''; ?>" />
+            <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+    </div>
+
     <!-- Start All Course -->
-    <h1 class="text-center">All Courses</h1>
+    <h1 class="text-center mt-5">All Courses</h1>
     <div class="row mt-4">
         <!-- Start All Course Row -->
         <?php
         // Pagination configuration
         $results_per_page = 6;
-        if (!isset($_GET['page'])) {
-            $page = 1;
-        } else {
-            $page = $_GET['page'];
-        }
+        $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
         $start_from = ($page - 1) * $results_per_page;
 
-        $sql = "SELECT * FROM course LIMIT $start_from, $results_per_page";
-        $result = $conn->query($sql);
+        // Get search term
+        $search_term = isset($_GET['search']) ? $_GET['search'] : '';
+
+        // Modify SQL query based on search term
+        if ($search_term != '') {
+            $sql = "SELECT * FROM course WHERE course_name LIKE ? OR course_desc LIKE ? LIMIT ?, ?";
+            $stmt = $conn->prepare($sql);
+            $like_term = '%' . $search_term . '%';
+            $stmt->bind_param("ssii", $like_term, $like_term, $start_from, $results_per_page);
+            $stmt->execute();
+            $result = $stmt->get_result();
+        } else {
+            $sql = "SELECT * FROM course LIMIT ?, ?";
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param("ii", $start_from, $results_per_page);
+            $stmt->execute();
+            $result = $stmt->get_result();
+        }
+
+        // Display course results
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
                 $course_id = $row['course_id'];
@@ -50,6 +73,8 @@ include('./mainInclude/header.php');
                     </div>
                 ';
             }
+        } else {
+            echo '<div class="col-12 text-center"><h3>No courses found.</h3></div>';
         }
         ?>
     </div><!-- End All Course Row -->
@@ -59,13 +84,26 @@ include('./mainInclude/header.php');
 <div class="container mt-3 mb-5">
     <ul class="pagination justify-content-center">
         <?php
-        $sql = "SELECT COUNT(*) AS total FROM course";
-        $result = $conn->query($sql);
+        // Get total course count for pagination
+        if ($search_term != '') {
+            $sql = "SELECT COUNT(*) AS total FROM course WHERE course_name LIKE ? OR course_desc LIKE ?";
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param("ss", $like_term, $like_term);
+            $stmt->execute();
+            $result = $stmt->get_result();
+        } else {
+            $sql = "SELECT COUNT(*) AS total FROM course";
+            $result = $conn->query($sql);
+        }
+
         $row = $result->fetch_assoc();
         $total_pages = ceil($row["total"] / $results_per_page);
 
+        // Pagination links
         for ($i = 1; $i <= $total_pages; $i++) {
-            echo "<li class='page-item'><a class='page-link' href='?page=" . $i . "'>" . $i . "</a></li>";
+            $active_class = ($i == $page) ? ' active' : '';
+            $query_params = http_build_query(array_merge($_GET, ["page" => $i]));
+            echo "<li class='page-item$active_class'><a class='page-link' href='?$query_params'>" . $i . "</a></li>";
         }
         ?>
     </ul>
@@ -79,4 +117,3 @@ include('./contact.php');
 <?php
 // Footer Include from mainInclude 
 include('./mainInclude/footer.php');
-?>

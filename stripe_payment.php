@@ -170,7 +170,7 @@
     </div>
     <!-- <a href="index.php" class="btn-continue">Back to Home</a> -->
     <button type="button" class="btn btn-outline-light btn-rounded" data-mdb-ripple-init data-mdb-ripple-color="dark">
-        <a href="index.php">Back to Home</a></button>
+        <a href="student/myCourse.php">Go to Dashboard to show Course</a></button>
 
 </div>
 

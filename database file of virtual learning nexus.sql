@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 17, 2024 at 07:32 PM
+-- Generation Time: May 09, 2024 at 10:14 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -39,7 +39,7 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`admin_id`, `admin_name`, `admin_email`, `admin_pass`) VALUES
-(1, 'admin', 'admin@gmail.com', '30751852');
+(1, 'admin', 'admin@gmail.com', '254557415');
 
 -- --------------------------------------------------------
 
@@ -109,7 +109,8 @@ INSERT INTO `courseorder` (`co_id`, `order_id`, `stu_email`, `course_id`, `amoun
 (34, 'ORDS91935272', 'witch@example.com', 8, 1655, '2024-04-17', 'TXN_SUCCESS', '8880fb8fca0e8787'),
 (35, 'ORDS90171219', 'witch@example.com', 12, 100, '2024-04-17', 'TXN_SUCCESS', 'c351b98072673600'),
 (36, 'ORDS36790621', 'marop@gmail.com', 20, 90, '2024-04-17', 'TXN_SUCCESS', '9809d4fdc7245a22'),
-(37, 'ORDS41492068', 'marop@gmail.com', 13, 800, '2024-04-17', 'TXN_SUCCESS', 'f0068e7054af9808');
+(37, 'ORDS41492068', 'marop@gmail.com', 13, 800, '2024-04-17', 'TXN_SUCCESS', 'f0068e7054af9808'),
+(40, 'ORDS23762877', 'zunayedzunu@gmail.com', 9, 700, '2024-05-09', 'TXN_SUCCESS', '796b697bd41bef72');
 
 -- --------------------------------------------------------
 
@@ -176,7 +177,8 @@ INSERT INTO `lesson` (`lesson_id`, `lesson_name`, `lesson_desc`, `lesson_link`, 
 (52, 'Idiomatic language for IELTS Speaking', 'ieltss', '../lessonvid/video15.mp4', 20, 'English for IELTS exam preparation course'),
 (53, 'watching movie', 'demo course', '../lessonvid/video7.mp4', 23, 'English Brain'),
 (54, 'Pronunciation for IELTS Speaking', 'demo', '../lessonvid/video16.mp4', 20, 'English for IELTS exam preparation course'),
-(55, 'Ielts Instruction', 'demo', '../lessonvid/video14.mp4', 20, 'English for IELTS exam preparation course');
+(55, 'Ielts Instruction', 'demo', '../lessonvid/video14.mp4', 20, 'English for IELTS exam preparation course'),
+(56, 'dsafas', 'fsadfase', '../lessonvid/video6.mp4', 16, 'Python Complete');
 
 -- --------------------------------------------------------
 
@@ -205,7 +207,9 @@ INSERT INTO `student` (`stu_id`, `stu_name`, `stu_email`, `stu_pass`, `stu_occ`,
 (176, ' Shaktiman', 'shaktiman@virtuallearningnexus.com', '123456', 'Software ENgg', '../image/stu/shaktiman.jpg'),
 (187, 'new', 'new@gmail.com', '301268468', 'student', ''),
 (188, '     md. marop hossain', 'marop@gmail.com', '30751852', 'Economist', '../image/stu/422264587_409477395078549_1597516652857268684_n (1).jpg'),
-(190, 'Saera Mahamud', 'searamahamud@northsouth.edu', '30751852', 'Student', '');
+(190, 'Saera Mahamud', 'searamahamud@northsouth.edu', '30751852', 'Student', ''),
+(191, '  md. marop', 'marop.hossain25@gmail.com', '30751852', '   student', '../image/stu/422264587_409477395078549_1597516652857268684_n (1).jpg'),
+(194, '    alix aro', 'alixaro@gmail.com', '123456', '    seller', '../image/stu/stripepayment.jpg');
 
 --
 -- Indexes for dumped tables
@@ -262,13 +266,13 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `course`
 --
 ALTER TABLE `course`
-  MODIFY `course_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `course_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `courseorder`
 --
 ALTER TABLE `courseorder`
-  MODIFY `co_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `co_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `feedback`
@@ -280,13 +284,13 @@ ALTER TABLE `feedback`
 -- AUTO_INCREMENT for table `lesson`
 --
 ALTER TABLE `lesson`
-  MODIFY `lesson_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+  MODIFY `lesson_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 
 --
 -- AUTO_INCREMENT for table `student`
 --
 ALTER TABLE `student`
-  MODIFY `stu_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=191;
+  MODIFY `stu_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=195;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

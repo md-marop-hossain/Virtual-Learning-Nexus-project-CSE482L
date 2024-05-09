@@ -1,5 +1,0 @@
-WV5teFqUJV8v
-
-
-MySQL DB Name	MySQL User Name	MySQL Password	MySQL Host Name	PHPMyAdmin
-if0_36465801_vlndb	if0_36465801	(Your vPanel Password)	sql300.infinityfree.com

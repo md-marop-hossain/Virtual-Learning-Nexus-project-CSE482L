@@ -20,7 +20,7 @@ $totalcourse = $result->num_rows;
  $result = $conn->query($sql);
  $totalstu = $result->num_rows;
 
- $sql = "SELECT * FROM courseorder";
+ $sql = "SELECT * FROM courseordernew";
  $result = $conn->query($sql);
  $totalsold = $result->num_rows;
 ?>
@@ -65,29 +65,38 @@ $totalcourse = $result->num_rows;
         <!--Table-->
         <p class=" bg-dark text-white p-2">Course Ordered</p>
         <?php
-      $sql = "SELECT * FROM courseorder";
+      $sql = "SELECT * FROM courseordernew";
       $result = $conn->query($sql);
       if($result->num_rows > 0){
   echo '<table class="table">
     <thead>
     <tr>
-      <th scope="col">Order ID</th>
+      <th scope="col">Payment ID</th>
       <th scope="col">Course ID</th>
+      <th scope="col">Course Name</th>
+      <th scope="col">Student Name</th>
       <th scope="col">Student Email</th>
       <th scope="col">Order Date</th>
       <th scope="col">Amount</th>
-      <th scope="col">Action</th>
+      <th scope="col">Card No</th>
+      <th scope="col">Status</th>
+      <th scope="col">Purchase date</th>
     </tr>
     </thead>
     <tbody>';
     while($row = $result->fetch_assoc()){
     echo '<tr>';
-      echo '<th scope="row">'.$row["order_id"].'</th>';
+      echo '<th scope="row">'.$row["paymentid"].'</th>';
       echo '<td>'. $row["course_id"].'</td>';
-      echo '<td>'.$row["stu_email"].'</td>';
-      echo '<td>'.$row["order_date"].'</td>';
-      echo '<td>'.$row["amount"].'</td>';
-      echo '<td><form action="" method="POST" class="d-inline"><input type="hidden" name="id" value='. $row["co_id"] .'><button type="submit" class="btn btn-secondary" name="delete" value="Delete"><i class="far fa-trash-alt"></i></button></form></td>';
+      echo '<td>'. $row["coursename"].'</td>';
+      echo '<td>'. $row["name"].'</td>';
+      echo '<td>'.$row["email"].'</td>';
+      echo '<td>'.$row["added_date"].'</td>';
+      echo '<td>'.$row["fees"].'</td>';
+      echo '<td>'.$row["card_number"].'</td>';
+      echo '<td>'.$row["status"].'</td>';
+      echo '<td>'.$row["added_date"].'</td>';
+      // echo '<td><form action="" method="POST" class="d-inline"><input type="hidden" name="id" value='. $row["course_id"] .'><button type="submit" class="btn btn-secondary" name="delete" value="Delete"><i class="far fa-trash-alt"></i></button></form></td>';
       echo '</tr>';
     }
   echo '</tbody>
@@ -96,7 +105,7 @@ $totalcourse = $result->num_rows;
     echo "0 Result";
   }
   if(isset($_REQUEST['delete'])){
-    $sql = "DELETE FROM courseorder WHERE co_id = {$_REQUEST['id']}";
+    $sql = "DELETE FROM courseordernew WHERE course_id = {$_REQUEST['id']}";
     if($conn->query($sql) === TRUE){
       // echo "Record Deleted Successfully";
       // below code will refresh the page after deleting the record

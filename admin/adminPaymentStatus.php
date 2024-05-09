@@ -22,19 +22,18 @@
             <label class="offset-sm-3 col-form-label">Order ID: </label>
             <div>
                 <input class="form-control mx-3" id="ORDER_ID" tabindex="1" maxlength="20" size="20" name="ORDER_ID"
-                    autocomplete="off" value="<?php echo $ORDER_ID ?>">
+                    autocomplete="off" value="<?php echo $ORDER_ID ?>" </div>
+                <div>
+                    <input class="btn btn-success mx-4" value="View" type="submit">
+                </div>
             </div>
-            <div>
-                <input class="btn btn-success mx-4" value="View" type="submit">
-            </div>
-        </div>
     </form>
 </div>
 
 <div class="container">
     <?php
     if ($ORDER_ID != "") {
-      $sql = "SELECT order_id, stu_email, course_id, amount, order_date, status, TXNID FROM courseorder WHERE order_id = '$ORDER_ID'";
+      $sql = "SELECT email, course_id, fees, added_date, status, paymentid FROM courseordernew WHERE paymentid = '$ORDER_ID'";
       $result = $conn->query($sql);
       if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
@@ -45,12 +44,12 @@
             <table class="table table-bordered">
                 <tbody>
                     <tr>
-                        <td><label>Order ID</label></td>
-                        <td><?php echo $row['order_id']; ?></td>
+                        <td><label>Payment ID</label></td>
+                        <td><?php echo $row['paymentid']; ?></td>
                     </tr>
                     <tr>
                         <td><label>Student Email</label></td>
-                        <td><?php echo $row['stu_email']; ?></td>
+                        <td><?php echo $row['email']; ?></td>
                     </tr>
                     <tr>
                         <td><label>Course Id</label></td>
@@ -58,19 +57,15 @@
                     </tr>
                     <tr>
                         <td><label>Course Price</label></td>
-                        <td><?php echo $row['amount']; ?></td>
+                        <td><?php echo $row['fees']; ?></td>
                     </tr>
                     <tr>
                         <td><label>Order Date</label></td>
-                        <td><?php echo $row['order_date']; ?></td>
+                        <td><?php echo $row['added_date']; ?></td>
                     </tr>
                     <tr>
                         <td><label>Payment Status</label></td>
                         <td><?php echo $row['status']; ?></td>
-                    </tr>
-                    <tr>
-                        <td><label>TXNID</label></td>
-                        <td><?php echo $row['TXNID']; ?></td>
                     </tr>
 
                     <tr>

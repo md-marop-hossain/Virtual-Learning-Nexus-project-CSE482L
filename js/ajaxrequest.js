@@ -10,7 +10,7 @@ $(document).ready(function() {
     
     // Ajax call to check if email already exists
     $.ajax({
-      url: "Student/addstudent.php",
+      url: "student/addstudent.php",
       type: "post",
       data: {
         checkemail: "checkmail",
@@ -102,7 +102,7 @@ function addStu() {
   else {
     // Ajax call to add new student
     $.ajax({
-      url: "Student/addstudent.php",
+      url: "student/addstudent.php",
       type: "post",
       data: {
         stusignup: "stusignup",
@@ -148,7 +148,7 @@ function checkStuLogin() {
   var stuLogPass = $("#stuLogPass").val();
   // Ajax call to verify student login
   $.ajax({
-    url: "Student/addstudent.php",
+    url: "student/addstudent.php",
     type: "post",
     data: {
       checkLogemail: "checklogmail",

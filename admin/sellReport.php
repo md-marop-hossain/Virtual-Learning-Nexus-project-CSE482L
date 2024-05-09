@@ -33,7 +33,7 @@ include('../dbConnection.php');
         $startdate = $_REQUEST['startdate'];
         $enddate = $_REQUEST['enddate'];
         // $sql = "SELECT * FROM courseorder WHERE order_date BETWEEN '2018-10-11' AND '2018-10-13'";
-        $sql = "SELECT * FROM courseorder WHERE order_date BETWEEN '$startdate' AND '$enddate'";
+        $sql = "SELECT * FROM courseordernew WHERE added_date BETWEEN '$startdate' AND '$enddate'";
         $result = $conn->query($sql);
         if($result->num_rows > 0){
         echo '
@@ -41,23 +41,38 @@ include('../dbConnection.php');
       <table class="table">
         <thead>
           <tr>
-            <th scope="col">Order ID</th>
+            <th scope="col">Payment ID</th>
             <th scope="col">Course ID</th>
+            <th scope="col">Student Name</th>
             <th scope="col">Student Email</th>
-           
-            <th scope="col">order Date</th>
+            <th scope="col">Order Date</th>
             <th scope="col">Amount</th>
+
+            <th scope="col">Course Name</th>
+            <th scope="col">Card Number</th>
+            <th scope="col">Card ExpiryMonth</th>
+            <th scope="col">Card ExpireYear</th>
+            <th scope="col">Payment Status</th>
+            <th scope="col">Purchase Date</th>
+
           </tr>
         </thead>
         <tbody>';
         while($row = $result->fetch_assoc()){
           echo '<tr>
-            <th scope="row">'.$row["order_id"].'</th>
+            <th scope="row">'.$row["paymentid"].'</th>
             <td>'.$row["course_id"].'</td>
-            <td>'.$row["stu_email"].'</td>
-            
-            <td>'.$row["order_date"].'</td>
-            <td>'.$row["amount"].'</td>
+            <td>'.$row["name"].'</td>
+            <td>'.$row["email"].'</td>
+            <td>'.$row["added_date"].'</td>
+            <td>'.$row["fees"].'</td>
+
+            <td>'.$row["coursename"].'</td>
+            <td>'.$row["card_number"].'</td>
+            <td>'.$row["card_expirymonth"].'</td>
+            <td>'.$row["card_expiryyear"].'</td>
+            <td>'.$row["status"].'</td>
+            <td>'.$row["added_date"].'</td>
           </tr>';
         }
         echo '<tr>

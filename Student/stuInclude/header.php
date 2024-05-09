@@ -32,7 +32,7 @@ if(isset($stuLogEmail)){
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>
         <?php echo TITLE ?>
-        <!-- Displaying the title -->
+
     </title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="../css/bootstrap.min.css">

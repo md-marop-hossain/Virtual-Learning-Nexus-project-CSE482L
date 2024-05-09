@@ -31,7 +31,7 @@ if(isset($_SESSION['is_login'])){
             // Checking if user's email is set
             if(isset($stuLogEmail)){
                 // Querying database to fetch user's enrolled courses
-                $sql = "SELECT co.order_id, c.course_id, c.course_name, c.course_duration, c.course_desc, c.course_img, c.course_author, c.course_original_price, c.course_price FROM courseorder AS co JOIN course AS c ON c.course_id = co.course_id WHERE co.stu_email = '$stuLogEmail'";
+                $sql = "SELECT  c.course_id, c.course_name, c.course_duration, c.course_desc, c.course_img, c.course_author, c.course_original_price, c.course_price FROM courseordernew AS co JOIN course AS c ON c.course_id = co.course_id WHERE co.email = '$stuLogEmail'";
                 $result = $conn->query($sql);
                 
                 // Checking if there are any courses enrolled by the user

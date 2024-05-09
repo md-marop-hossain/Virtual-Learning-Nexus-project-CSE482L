@@ -46,20 +46,25 @@ $stu_email = '';
                             <p class="card-text"> Duration: '.$row['course_duration'].'</p>';
                             // Check if the user has already bought the course
                             
-                            $check_order_sql = "SELECT course_id, stu_email FROM courseorder WHERE course_id = '$course_id' AND stu_email = '$stu_email'";
+                            $check_order_sql = "SELECT course_id, email FROM courseordernew WHERE course_id = '$course_id' AND email = '$stu_email'";
                             $check_order_result = $conn->query($check_order_sql);
                             if($check_order_result->num_rows > 0) {
                                 // If the user has bought the course, show "Go to courses you have already purchased button
                                 echo '<a href="student/myCourse.php" class="btn text-white font-weight-bolder float-right" style="background-color: #092737; color: white">Go to courses you have already purchased</a>';
                             } else {
                                 // If the user has not bought the course, show "Buy Now" button
-                                echo '<form action="checkout.php" method="post">
+                                echo '<form action="paymentcheckout.php" method="post">
                                     <p class="card-text d-inline">Price: <small><del>&#65284 '.$row['course_original_price'].'</del></small> <span class="font-weight-bolder">&#65284 '.$row['course_price'].'<span></p>
                                     <!-- Hidden input field to pass course price to checkout -->
                                     <input type="hidden" name="id" value="'. $row["course_price"] .'"> 
 
                                     <!-- Hidden input field to pass course price to checkout -->
                                     <input type="hidden" name="cid" value="'. $row["course_id"] .'"> 
+
+                                    <!-- Hidden input field to pass course name to checkout -->
+                                    <input type="hidden" name="cname" value="'. $row["course_name"] .'"> 
+
+                                    
 
                                     <!-- Button to buy the course -->
                                     <button type="submit" class="btn text-white font-weight-bolder float-right" style="background-color: #092737; color: white" name="buy">Buy Now</button>

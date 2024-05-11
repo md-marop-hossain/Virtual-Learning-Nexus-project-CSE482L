@@ -116,4 +116,5 @@ include('./contact.php');
 
 <?php
 // Footer Include from mainInclude 
-include('./mainInclude/footer.php');
+include('./mainInclude/footer.php'); 
+?>

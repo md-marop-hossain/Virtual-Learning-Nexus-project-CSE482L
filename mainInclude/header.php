@@ -51,6 +51,22 @@ session_start();
         opacity: 0.8;
     }
     </style>
+
+    <script>
+    function validateForm() {
+        var name = document.getElementById("name").value;
+        var email = document.getElementById("email").value;
+        var subject = document.getElementsByName("subject")[0].value;
+        var message = document.getElementsByName("message")[0].value;
+
+        if (name == "" || email == "" || subject == "" || message == "") {
+            alert("All fields are required!");
+            return false;
+        }
+
+        return true;
+    }
+    </script>
 </head>
 
 <body style="background-color: #001a352e">

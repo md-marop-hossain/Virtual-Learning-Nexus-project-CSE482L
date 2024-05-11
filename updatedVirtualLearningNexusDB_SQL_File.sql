@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 09, 2024 at 10:14 PM
+-- Generation Time: May 11, 2024 at 10:04 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -73,7 +73,8 @@ INSERT INTO `course` (`course_id`, `course_name`, `course_desc`, `course_author`
 (17, 'Learn React Native', 'THis is react native for android and iso app development', 'GeekyShows', '../image/courseimg/Machine.jpg', '2 months', 200, 3000),
 (20, 'English for IELTS exam preparation course', 'Do you need a Band score of 7 or higher? Have you tried repeatedly but have not made progress? Do you need an actual guide to Band 7 success? This course is just for you as it prepares participants for all parts of the IELTS exam: Listening, Reading, Writing, and Speaking modules. It focuses on teaching the skills and techniques required to sit for the test. ', 'Keino Campbell', '../image/courseimg/Free-Online-Classes-for-IELTS.png', '93 hours on-demand video', 90, 100),
 (22, 'Building Your English Brain', 'Learn to start thinking in English so that you can stop translating in your head and become fluent in English faster.', 'Luke Dore', '../image/courseimg/download (18).png', '10 Days', 80, 100),
-(23, 'English Brain', 'Learn to start thinking in English so that you can stop translating in your head and become fluent in English faster.', 'lukiii', '../image/courseimg/download.jpeg', '20 days', 18, 20);
+(23, 'English Brain', 'Learn to start thinking in English so that you can stop translating in your head and become fluent in English faster.', 'lukiii', '../image/courseimg/download.jpeg', '20 days', 18, 20),
+(25, 'demo', 'demo', 'deasfd', '../image/courseimg/stripepayment.jpg', '4', 32, 12);
 
 -- --------------------------------------------------------
 
@@ -111,6 +112,41 @@ INSERT INTO `courseorder` (`co_id`, `order_id`, `stu_email`, `course_id`, `amoun
 (36, 'ORDS36790621', 'marop@gmail.com', 20, 90, '2024-04-17', 'TXN_SUCCESS', '9809d4fdc7245a22'),
 (37, 'ORDS41492068', 'marop@gmail.com', 13, 800, '2024-04-17', 'TXN_SUCCESS', 'f0068e7054af9808'),
 (40, 'ORDS23762877', 'zunayedzunu@gmail.com', 9, 700, '2024-05-09', 'TXN_SUCCESS', '796b697bd41bef72');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `courseordernew`
+--
+
+CREATE TABLE `courseordernew` (
+  `id` int(11) NOT NULL,
+  `name` text DEFAULT NULL,
+  `email` text DEFAULT NULL,
+  `coursename` text DEFAULT NULL,
+  `fees` text DEFAULT NULL,
+  `card_number` text DEFAULT NULL,
+  `card_expirymonth` text DEFAULT NULL,
+  `card_expiryyear` text DEFAULT NULL,
+  `status` text DEFAULT NULL,
+  `paymentid` text DEFAULT NULL,
+  `added_date` datetime DEFAULT NULL,
+  `course_id` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `courseordernew`
+--
+
+INSERT INTO `courseordernew` (`id`, `name`, `email`, `coursename`, `fees`, `card_number`, `card_expirymonth`, `card_expiryyear`, `status`, `paymentid`, `added_date`, `course_id`) VALUES
+(10, 'zunayed zunu', 'zunayedzunu@gmail.com', 'Angular JS', '800', '4242424242424242', '02', '26', 'succeeded', 'ch_3PEahLJyuM0u2xxs1KkI6sPI', '2024-05-09 19:24:02', '13'),
+(11, 'zunayed zunu', 'zunayedzunu@gmail.com', 'Learn Vue JS', '100', '4242424242424242', '02', '26', 'succeeded', 'ch_3PEak8JyuM0u2xxs0d2Lq46C', '2024-05-09 19:26:55', '12'),
+(12, 'zunayed zunu', 'zunayedzunu@gmail.com', 'The Complete JavaScript Course 2024: From Zero to Expert!', '1655', '4242424242424242', '02', '26', 'succeeded', 'ch_3PEanUJyuM0u2xxs0AVOsdgL', '2024-05-09 19:30:23', '8'),
+(13, 'zunayed zunu', 'zunayedzunu@gmail.com', 'Hands-on Artificial Intelligence', '900', '4242424242424242', '02', '26', 'succeeded', 'ch_3PEbipJyuM0u2xxs0pccjhzz', '2024-05-09 20:29:39', '11'),
+(14, 'zunayed zunu', 'zunayedzunu@gmail.com', 'Complete PHP Bootcamp', '700', '4242424242424242', '02', '25', 'succeeded', 'ch_3PEbo2JyuM0u2xxs18BCcW91', '2024-05-09 20:35:03', '9'),
+(19, '    alix aro', 'alixaro@gmail.com', 'The Complete JavaScript Course 2024: From Zero to Expert!', '1655', '4242424242424242', '06', '27', 'succeeded', 'ch_3PEdJxJyuM0u2xxs1bMwItry', '2024-05-09 22:12:06', '8'),
+(20, ' Shaktiman', 'shaktiman@virtuallearningnexus.com', 'demo', '32', '4242424242424242', '04', '30', 'succeeded', 'ch_3PEdojJyuM0u2xxs0sV4aRge', '2024-05-09 22:43:54', '25'),
+(21, ' Shaktiman', 'shaktiman@virtuallearningnexus.com', 'demo', '32', '4242424242424242', '08', '33', 'succeeded', 'ch_3PEdsAJyuM0u2xxs1bOxrMyE', '2024-05-09 22:47:27', '25');
 
 -- --------------------------------------------------------
 
@@ -235,6 +271,12 @@ ALTER TABLE `courseorder`
   ADD UNIQUE KEY `order_id` (`order_id`);
 
 --
+-- Indexes for table `courseordernew`
+--
+ALTER TABLE `courseordernew`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `feedback`
 --
 ALTER TABLE `feedback`
@@ -266,13 +308,19 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `course`
 --
 ALTER TABLE `course`
-  MODIFY `course_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `course_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `courseorder`
 --
 ALTER TABLE `courseorder`
   MODIFY `co_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+
+--
+-- AUTO_INCREMENT for table `courseordernew`
+--
+ALTER TABLE `courseordernew`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `feedback`

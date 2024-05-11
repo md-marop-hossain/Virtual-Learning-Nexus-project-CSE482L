@@ -66,6 +66,7 @@ $(document).ready(function() {
 });
 
 // Function to add a new student via Ajax
+// Function to add a new student via Ajax
 function addStu() {
   // Regular expression to validate email format
   var reg = /^[A-Z0-9._%+-]+@([A-Z0-9-]+\.)+[A-Z]{2,4}$/i;
@@ -113,11 +114,26 @@ function addStu() {
       success: function(data) {
         console.log(data);
         if (data == "OK") {
-          $("#successMsg").html(
-            '<span class="alert alert-success"> Registration Successful ! </span>'
-          );
-          // Clearing fields after successful signup
-          clearStuRegField();
+          // Perform login after successful registration
+          $.ajax({
+            url: "student/addstudent.php", // Assuming this is the login endpoint
+            type: "post",
+            data: {
+              checkLogemail: "checklogmail",
+              stuLogEmail: stuemail,
+              stuLogPass: stupass
+            },
+            success: function(data) {
+              console.log(data);
+              if (data == 1) {
+                // Redirect after successful login
+                window.location.href = "student/studentProfile.php";
+              } else {
+                // Handle login failure after registration
+                console.log("Login failed after registration");
+              }
+            }
+          });
         } else if (data == "Failed") {
           $("#successMsg").html(
             '<span class="alert alert-danger"> Unable to Register ! </span>'
@@ -127,6 +143,7 @@ function addStu() {
     });
   }
 }
+
 
 // Function to empty all fields and status messages of student registration form
 function clearStuRegField() {
@@ -169,7 +186,7 @@ function checkStuLogin() {
         clearStuLoginField();
         // Redirecting after successful login
         setTimeout(() => {
-          window.location.href = "index.php";
+          window.location.href = "student/studentProfile.php";
         }, 1000);
       }
     }

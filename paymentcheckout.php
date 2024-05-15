@@ -231,7 +231,7 @@ $stmt->close(); // Close the statement
     <script>
     // Set your publishable key
     Stripe.setPublishableKey(
-        'pk_test_51PFf7YFHSWAUronVPlUR1WfdApI0gHP3w8Hh9Qvn3NCovLd1UAcZgWEvJyLwDlwLbBKD51VywJ0bfeIcMTA14aPF007VWVCnEd'
+        'pk_test_51PEQhGJyuM0u2xxsb0s1fQwXXxKUuPhLGZplIbZBeEdZXZWVdoyygGly1aPTvAo8KEF4BUWUEWLbu2QH72ToqLtv00F11KaQo0'
     );
 
     // Callback to handle the response from stripe

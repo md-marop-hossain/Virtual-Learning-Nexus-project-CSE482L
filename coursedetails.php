@@ -32,6 +32,7 @@ $stu_email = '';
                 }
                 // Initial course price
                 $course_price = $row['course_price'];
+                $course_price_original =  $course_price;
                 // Check if coupon code is submitted
                 if(isset($_POST['apply_coupon'])) {
                     $coupon_code = $_POST['coupon_code'];
@@ -46,7 +47,7 @@ $stu_email = '';
                         // Update course price after discount
                         $course_price -= $discount_amount;
                         // Show success message
-                        echo '<div class="alert" style="background-color: #01791d; color: white" role="alert">Coupon applied successfully! You got '.$discount_percentage.'% discount. Discounted price: &#36;'.$course_price.'</div>';
+                        echo '<div class="alert" style="background-color: #01791d; color: white" role="alert">Coupon applied successfully! You got '.$discount_percentage.'% discount. Original Price was &#36;'.$course_price_original.', Discounted price: &#36;'.$course_price.'</div>';
                     } else {
                         // Coupon does not exist
                         echo '<div class="alert" style="background-color: #051d21; color: white" role="alert">Coupon does not exist!</div>';
@@ -87,6 +88,11 @@ $stu_email = '';
                                     <input type="hidden" name="id" value="'. $course_price .'"> 
                                     <input type="hidden" name="cid" value="'. $row["course_id"] .'"> 
                                     <input type="hidden" name="cname" value="'. $row["course_name"] .'"> 
+
+                                    <!-- Add to Watchlist button -->
+                                    <button class="btn btn-info mb-2 ml-1 add-to-watchlist" data-courseid="'.$row['course_id'].'">Add to Watchlist</button>
+
+
                                     <button type="submit" class="btn text-white font-weight-bolder float-right mb-2" style="background-color: #092737; color: white" name="buy">Buy Now</button>
                                 </form>';
                             }
@@ -134,6 +140,42 @@ $stu_email = '';
         ?>
     </div>
 </div>
+
+
+<!-- JavaScript code to handle adding course to watchlist -->
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    var addToWatchlistButtons = document.querySelectorAll('.add-to-watchlist');
+    addToWatchlistButtons.forEach(function(button) {
+        button.addEventListener('click', function(event) {
+            // Prevent default behavior of anchor tag
+            event.preventDefault();
+
+            var courseId = this.getAttribute('data-courseid');
+            var existingWatchlist = getCookie("watchlist");
+            // Check if watchlist cookie already exists
+            if (existingWatchlist) {
+                // Append new courseId to existing watchlist
+                var updatedWatchlist = existingWatchlist + ',' + courseId;
+                document.cookie = "watchlist=" + updatedWatchlist + "; path=/";
+            } else {
+                // Create new watchlist cookie
+                document.cookie = "watchlist=" + courseId + "; path=/";
+            }
+            alert("Course added to watchlist!");
+        });
+    });
+});
+
+// Function to get cookie value by name
+function getCookie(name) {
+    var value = "; " + document.cookie;
+    var parts = value.split("; " + name + "=");
+    if (parts.length == 2) return parts.pop().split(";").shift();
+}
+</script>
+
+
 
 <?php 
 // Including the footer section from mainInclude 

@@ -30,8 +30,8 @@
 
 		// set API Key
 		$stripe = array(
-		"SecretKey"=>"sk_test_51PFf7YFHSWAUronVlmSVx1Tqni5VAx9WXC9hPbUzteTfuRx8cbIJDBhktgj8mvHZXl4s1Haywn08hGtDd55su0g500zxkdKn0L",
-		"PublishableKey"=>"pk_test_51PFf7YFHSWAUronVPlUR1WfdApI0gHP3w8Hh9Qvn3NCovLd1UAcZgWEvJyLwDlwLbBKD51VywJ0bfeIcMTA14aPF007VWVCnEd"
+		"SecretKey"=>"sk_test_51PEQhGJyuM0u2xxsa7BIBLJvLPjKGRRvSdH5Sc5ztzoYCpdpsXT5aNsDvwMQRnMYZpC7Sv7ZHEc64KBEOtFrbMrb00pXrJNtiq",
+		"PublishableKey"=>"pk_test_51PEQhGJyuM0u2xxsb0s1fQwXXxKUuPhLGZplIbZBeEdZXZWVdoyygGly1aPTvAo8KEF4BUWUEWLbu2QH72ToqLtv00F11KaQo0"
 		);
 
 		// Set your secret key: remember to change this to your live secret key in production

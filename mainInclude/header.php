@@ -73,7 +73,7 @@ session_start();
     <!-- <body style="background-color: #001a352e"> -->
     <!-- Setting background color of body -->
     <!-- Start Navigation -->
-    <nav class="navbar navbar-expand-sm navbar-dark pl-5 fixed-top">
+    <nav class="navbar navbar-expand-sm navbar-dark pl-5 fixed-top" style="background-color: rgb(34, 84, 112)">
         <!-- Brand logo and text -->
         <a href="index.php" class="navbar-brand">Virtual Learning Nexus</a>
         <span class="navbar-text">Learn and Implement</span>
@@ -99,6 +99,7 @@ session_start();
                 <!-- Feedback and Contact links -->
                 <li class="nav-item custom-nav-item"><a href="#Feedback" class="nav-link">Feedback</a></li>
                 <li class="nav-item custom-nav-item"><a href="#Contact" class="nav-link">Contact</a></li>
+                <li class="nav-item custom-nav-item"><a href="watchlist.php" class="nav-link">WatchList</a></li>
             </ul>
         </div>
     </nav> <!-- End Navigation -->

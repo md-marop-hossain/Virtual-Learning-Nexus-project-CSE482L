@@ -1,7 +1,6 @@
 <?php
-// Including the database connection file
+// Include necessary files
 include('./dbConnection.php');
-// Including the header section from mainInclude
 include('./mainInclude/header.php'); 
 $stu_email = '';
 ?>
@@ -20,8 +19,6 @@ $stu_email = '';
     // Checking if a course_id is set in the URL
     if(isset($_GET['course_id'])){
         $course_id = $_GET['course_id'];
-        // Setting the course_id in the session
-        $_SESSION['course_id'] = $course_id;
         // Fetching course details based on course_id
         $sql = "SELECT * FROM course WHERE course_id = '$course_id'";
         $result = $conn->query($sql);
@@ -33,6 +30,29 @@ $stu_email = '';
                 if(isset($_SESSION['stuLogEmail'])) {
                     $stu_email = $_SESSION['stuLogEmail'];
                 }
+                // Initial course price
+                $course_price = $row['course_price'];
+                // Check if coupon code is submitted
+                if(isset($_POST['apply_coupon'])) {
+                    $coupon_code = $_POST['coupon_code'];
+                    // Fetch coupon details from database
+                    $coupon_sql = "SELECT * FROM coursecoupon WHERE coupon_code = '$coupon_code'";
+                    $coupon_result = $conn->query($coupon_sql);
+                    if($coupon_result->num_rows > 0) {
+                        // Coupon exists, calculate discount
+                        $coupon_row = $coupon_result->fetch_assoc();
+                        $discount_percentage = $coupon_row['couponpercentage'];
+                        $discount_amount = ($course_price * $discount_percentage) / 100;
+                        // Update course price after discount
+                        $course_price -= $discount_amount;
+                        // Show success message
+                        echo '<div class="alert" style="background-color: #01791d; color: white" role="alert">Coupon applied successfully! You got '.$discount_percentage.'% discount. Discounted price: &#36;'.$course_price.'</div>';
+                    } else {
+                        // Coupon does not exist
+                        echo '<div class="alert" style="background-color: #051d21; color: white" role="alert">Coupon does not exist!</div>';
+                    }
+                }
+
                 echo ' 
                 <div class="row">
                     <div class="col-md-4">
@@ -43,33 +63,34 @@ $stu_email = '';
                         <div class="card-body">
                             <h5 class="card-title">Course Name: '.$row['course_name'].'</h5>
                             <p class="card-text"> Description: '.$row['course_desc'].'</p>
-                            <p class="card-text"> Duration: '.$row['course_duration'].'</p>';
-                            // Check if the user has already bought the course
+                            <p class="card-text"> Duration: '.$row['course_duration'].'</p>
+                            <p class="card-text">Price: &#36;'.$course_price.'</p>';
                             
+                            // Check if the user has already bought the course
                             $check_order_sql = "SELECT course_id, email FROM courseordernew WHERE course_id = '$course_id' AND email = '$stu_email'";
                             $check_order_result = $conn->query($check_order_sql);
                             if($check_order_result->num_rows > 0) {
                                 // If the user has bought the course, show "Go to courses you have already purchased button
-                                echo '<a href="student/myCourse.php" class="btn text-white font-weight-bolder float-right" style="background-color: #092737; color: white">Go to courses you have already purchased</a>';
+                                echo '<a href="student/myCourse.php" class="btn text-white mb-3 font-weight-bolder float-right" style="background-color: #092737; color: white">Go to courses you have already purchased</a>';
                             } else {
-                                // If the user has not bought the course, show "Buy Now" button
-                                echo '<form action="paymentcheckout.php" method="post">
-                                    <p class="card-text d-inline">Price: <small><del>&#65284 '.$row['course_original_price'].'</del></small> <span class="font-weight-bolder">&#65284 '.$row['course_price'].'<span></p>
-                                    <!-- Hidden input field to pass course price to checkout -->
-                                    <input type="hidden" name="id" value="'. $row["course_price"] .'"> 
-
-                                    <!-- Hidden input field to pass course price to checkout -->
+                                // If the user has not bought the course, show coupon form and "Buy Now" button
+                                echo '
+                                <!-- Coupon code form -->
+                                <form action="" method="post" class="form-inline ">
+                                <div class="form-group  mb-2">
+                                    <input type="text" class="form-control" id="coupon_code" name="coupon_code" placeholder="Coupon Code">
+                                </div>
+                                <button type="submit" class="btn btn-info mb-2 ml-1" name="apply_coupon">Apply Coupon</button>
+                            </form>
+                            <br>
+                                <form action="paymentcheckout.php" method="post">
+                                    <input type="hidden" name="id" value="'. $course_price .'"> 
                                     <input type="hidden" name="cid" value="'. $row["course_id"] .'"> 
-
-                                    <!-- Hidden input field to pass course name to checkout -->
                                     <input type="hidden" name="cname" value="'. $row["course_name"] .'"> 
-
-                                    
-
-                                    <!-- Button to buy the course -->
-                                    <button type="submit" class="btn text-white font-weight-bolder float-right" style="background-color: #092737; color: white" name="buy">Buy Now</button>
+                                    <button type="submit" class="btn text-white font-weight-bolder float-right mb-2" style="background-color: #092737; color: white" name="buy">Buy Now</button>
                                 </form>';
                             }
+                            
                             echo '
                         </div>
                     </div>

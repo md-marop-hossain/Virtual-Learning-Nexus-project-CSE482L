@@ -69,7 +69,8 @@ session_start();
     </script>
 </head>
 
-<body style="background-color: #001a352e">
+<body>
+    <!-- <body style="background-color: #001a352e"> -->
     <!-- Setting background color of body -->
     <!-- Start Navigation -->
     <nav class="navbar navbar-expand-sm navbar-dark pl-5 fixed-top">

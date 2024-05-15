@@ -41,7 +41,7 @@
             <h5><i class="fas fa-keyboard mr-3"></i> Lifetime Access</h5> <!-- Displaying lifetime access -->
         </div>
         <div class="col-sm">
-            <h5><i class="fas fa-rupee-sign mr-3"></i> Money Back Guarantee*</h5>
+            <h5><i class="fas fa-dollar-sign mr-3"></i> Money Back Guarantee*</h5>
             <!-- Displaying money-back guarantee -->
         </div>
     </div>

@@ -19,16 +19,14 @@ if (isset($_POST["send"])) {
     $mail->isSMTP();                              //Send using SMTP
     $mail->Host       = 'smtp.gmail.com';       //Set the SMTP server to send through
     $mail->SMTPAuth   = true;             //Enable SMTP authentication
-    // $mail->Username   = 'virtuallearningnexus@gmail.com';   //SMTP write your email
-    // $mail->Password   = 'cgxf lifh nvid gphj';      //SMTP password
-    $mail->Username   = 'marop.hossain21@gmail.com';                    
-    $mail->Password   = 'sbhn ewze bxco zirs';
+    $mail->Username   = 'virtuallearningnexus@gmail.com';   //SMTP write your email
+    $mail->Password   = 'cgxf lifh nvid gphj';      //SMTP password
     $mail->SMTPSecure = 'ssl';            //Enable implicit SSL encryption
     $mail->Port       = 465;                                    
 
     //Recipients
     $mail->setFrom( $_POST["email"], $_POST["name"]); // Sender Email and name
-    $mail->addAddress('marop.hossain21@gmail.com');     //Add a recipient email  
+    $mail->addAddress('virtuallearningnexus@gmail.com');     //Add a recipient email  
     $mail->addReplyTo($_POST["email"], $_POST["name"]); // reply to sender email
 
     //Content

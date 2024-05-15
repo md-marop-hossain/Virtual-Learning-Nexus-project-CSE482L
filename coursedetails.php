@@ -81,7 +81,7 @@ $stu_email = '';
                                 <div class="form-group  mb-2">
                                     <input type="text" class="form-control" id="coupon_code" name="coupon_code" placeholder="Coupon Code">
                                 </div>
-                                <button type="submit" class="btn btn-info mb-2 ml-1" name="apply_coupon">Apply Coupon</button>
+                                <button type="submit" class="btn btn-info mb-2 ml-1" name="apply_coupon"><b>Apply Coupon</b></button>
                             </form>
                             <br>
                                 <form action="paymentcheckout.php" method="post">
@@ -90,7 +90,7 @@ $stu_email = '';
                                     <input type="hidden" name="cname" value="'. $row["course_name"] .'"> 
 
                                     <!-- Add to Watchlist button -->
-                                    <button class="btn btn-info mb-2 ml-1 add-to-watchlist" data-courseid="'.$row['course_id'].'">Add to Watchlist</button>
+                                    <button class="btn mb-2 ml-1 add-to-watchlist float-right" data-courseid="'.$row['course_id'].'" style="background-color: #106d25; color: white"><b>Add to Watchlist</b></button>
 
 
                                     <button type="submit" class="btn text-white font-weight-bolder float-right mb-2" style="background-color: #092737; color: white" name="buy">Buy Now</button>
